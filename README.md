@@ -25,9 +25,9 @@ means you should not type or create any JSON; or even data structures.
 The following snippet:
 
 ```ruby
-%q(
+expect(%q(
   {"first_name":"Jason","last_name":"Voorhees"}
-).should have_jason([:first_name,:last_name])
+)).to have_jason([:first_name,:last_name])
 ```
 
 would result in a match. The supplied JSON has a `:first_name` and a
@@ -36,9 +36,9 @@ would result in a match. The supplied JSON has a `:first_name` and a
 Off course, you can also specify your root object:
 
 ```ruby
-%q(
+expect(%q(
   {"movie":{"title":"Friday the 13th","release_year":"1980"}}
-).should have_jason(
+)).to have_jason(
   movie: [ :title, :release_year ]
 )
 ```
@@ -53,9 +53,9 @@ object in the specifications key, like so:
 
 my_movie = Movie.find(x)
 
-%q(
+expect(%q(
   {"movie":{"title":"Friday the 13th","release_year":"1980"}}
-).should have_jason(
+)).to have_jason(
   { movie: { my_movie => [ :title, :release_year ] } }
 )
 ```
@@ -72,9 +72,9 @@ specification?
 **Jason::Spec** to the resque:
 
 ```ruby
-%q(
+expect(%q(
   {"movies":[{"title":"Friday the 13th"},{"title":"Nightmare on Elm Street"}]}
-).should have_jason(
+)).to have_jason(
   movies: Jason.spec( type: Array, size: 2, each: [ :title ] )
 )
 ```
@@ -98,7 +98,7 @@ json = %q({"user":{
   ]
 })
 
-json.should have_jason(
+expect(json).to have_jason(
   user: {
     user_name: "jason",
     favorite_movies: Jason.spec(type: Array, each: [ :title, :id ])

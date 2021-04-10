@@ -1,5 +1,6 @@
 require 'pp'
 require 'jason/spec'
+require 'date'
 
 module Jason
 
@@ -40,7 +41,7 @@ module Jason
     # @return [Boolean]
     #
     def matches?(actual)
-      @actual = actual.is_a?(String) ? Rufus::Json.decode(actual) : actual
+      @actual = actual.is_a?(String) ? JSON.parse(actual) : actual
 
       @misses = match_recursively(@specs, @actual)
 
@@ -151,7 +152,7 @@ module Jason
     end
 
     # @return [String] Message to provide if it shouldn't have matched but did
-    def negative_failure_message
+    def failure_message_when_negated
       "Jason has: #{@actual}"
     end
   end

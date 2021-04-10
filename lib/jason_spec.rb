@@ -1,4 +1,4 @@
 require 'rspec'
-require 'rufus-json/automatic'
+require 'json'
 
 require 'jason/matchers'

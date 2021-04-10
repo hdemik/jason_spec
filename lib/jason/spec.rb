@@ -93,7 +93,7 @@ module Jason
         return
       end
 
-      hit = if size.is_a?(Fixnum)
+      hit = if size.is_a?(Integer)
         value.size == size
       elsif size.is_a?(Range)
         size.cover?(value.size)

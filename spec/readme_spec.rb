@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe "Examples from readme" do
   it "should do the most basic example" do
-    %q({"first_name":"Jason","last_name":"Voorhees"}).should have_jason([:first_name,:last_name])
+    expect(%q({"first_name":"Jason","last_name":"Voorhees"})).to have_jason([:first_name,:last_name])
   end
 
   it "should do the root example" do
-    %q({"movie":{"title":"Friday the 13th","release_year":"1980"}}).should have_jason(
+    expect(%q({"movie":{"title":"Friday the 13th","release_year":"1980"}})).to have_jason(
       movie: [ :title, :release_year ]
     )
   end
@@ -25,13 +25,13 @@ describe "Examples from readme" do
 
     my_movie = Movie.find(1)
 
-    %q({"movie":{"title":"Friday the 13th","release_year":"1980"}}).should have_jason(
+    expect(%q({"movie":{"title":"Friday the 13th","release_year":"1980"}})).to have_jason(
       { movie: { my_movie => [ :title, :release_year ] } }
     )
   end
 
   it "should do the basic Jason.spec example" do
-    %q({"movies":[{"title":"Friday the 13th"},{"title":"Nightmare on Elm Street"}]}).should have_jason(
+    expect(%q({"movies":[{"title":"Friday the 13th"},{"title":"Nightmare on Elm Street"}]})).to have_jason(
       movies: Jason.spec( type: Array, size: 2, each: [ :title ] )
     )
   end
@@ -50,7 +50,7 @@ describe "Examples from readme" do
       ]
     })
 
-    json.should have_jason(
+    expect(json).to have_jason(
       user: {
         user_name: "jason",
         favorite_movies: Jason.spec(type: Array, each: [ :title, :id ])
